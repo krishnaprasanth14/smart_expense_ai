@@ -16,6 +16,8 @@ RUN flutter build web --release
 
 FROM nginx:alpine
 
+RUN apk update && apk upgrade
+
 RUN rm -rf /usr/share/nginx/html/*
 
 COPY --from=build /app/build/web /usr/share/nginx/html

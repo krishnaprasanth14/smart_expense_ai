@@ -1,0 +1,7 @@
+services:
+  smart-expense-ai-web:
+    image: ${SMART_EXPENSE_IMAGE:-smart-expense-ai-web:jenkins}
+    container_name: smart-expense-ai-compose
+    ports:
+      - "8083:80"
+    restart: unless-stopped
