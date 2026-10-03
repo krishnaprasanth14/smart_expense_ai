@@ -13,7 +13,14 @@ pipeline {
         stage('Flutter Analyze') {
             steps {
                 echo 'Running Flutter static analysis'
-                bat 'flutter analyze'
+
+                bat '''
+                    docker run --rm ^
+                    -v "%CD%:/app" ^
+                    -w /app ^
+                    ghcr.io/solvro/flutter-web-only:3.47.5 ^
+                    flutter analyze
+                '''
             }
         }
 
