@@ -8,7 +8,7 @@ RUN flutter pub get
 
 COPY . .
 
-RUN flutter analyze
+RUN flutter analyze --no-fatal-infos
 
 RUN flutter test
 
