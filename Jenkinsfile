@@ -19,10 +19,9 @@ pipeline {
         stage('Trivy Security Scan') {
             steps {
                 echo 'Scanning Docker image for HIGH and CRITICAL vulnerabilities'
-                bat 'trivy image --exit-code 1 --severity HIGH,CRITICAL smart-expense-ai-web:jenkins'
+                bat 'trivy image --timeout 30m --exit-code 1 --severity HIGH,CRITICAL smart-expense-ai-web:jenkins'
             }
         }
-
         stage('Deploy') {
             steps {
                 echo 'Deploying Smart Expense AI using Docker Compose'
