@@ -20,23 +20,18 @@ pipeline {
 
         stage('Deploy') {
             steps {
-                echo 'Deploying Smart Expense AI container'
+                echo 'Deploying Smart Expense AI using Docker Compose'
 
-                // Stop existing container if it is running
-                bat 'docker stop smart-expense-ai-jenkins 2>NUL || exit /b 0'
-
-                // Remove existing container if it exists
-                bat 'docker rm smart-expense-ai-jenkins 2>NUL || exit /b 0'
-
-                // Start new container
-                bat 'docker run -d -p 8082:80 --name smart-expense-ai-jenkins smart-expense-ai-web:jenkins'
+                bat 'docker compose down'
+                bat 'docker compose up -d'
             }
         }
 
         stage('Verify Deployment') {
             steps {
-                echo 'Checking deployed container'
-                bat 'docker ps --filter "name=smart-expense-ai-jenkins"'
+                echo 'Checking Docker Compose deployment'
+
+                bat 'docker compose ps'
             }
         }
     }
