@@ -9,22 +9,11 @@ pipeline {
                 checkout scm
             }
         }
-        stage('Flutter Analyze') {
-        steps {
-            echo 'Running Flutter static analysis'
 
-                bat '''
-                    docker run --rm ^
-                    -v "%CD%:/app" ^
-                    -w /app ^
-                    ghcr.io/solvro/flutter-web-only:3.47.5 ^
-                    flutter analyze
-                '''
-            }
-        }
         stage('Docker Build') {
             steps {
-                echo 'Building Smart Expense AI Docker image'
+                echo 'Running Flutter analysis, tests and Docker build'
+
                 bat 'docker build -t smart-expense-ai-web:jenkins .'
             }
         }

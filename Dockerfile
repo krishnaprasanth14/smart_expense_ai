@@ -8,6 +8,10 @@ RUN flutter pub get
 
 COPY . .
 
+RUN flutter analyze
+
+RUN flutter test
+
 RUN flutter build web --release
 
 FROM nginx:alpine
